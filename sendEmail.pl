@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 ##############################################################################
 ## sendEmail
 ## Written by: Brandon Zehm <caspian@dotconf.net>
@@ -80,7 +80,6 @@ my %conf = (
     
 );
 
-
 ## This hash stores the options passed on the command line via the -o option.
 my %opt = (
     ## Addressing
@@ -137,18 +136,11 @@ if ($@) { $conf{'tls_client'} = 0; }
 else    { $conf{'tls_client'} = 1; }
 
 
-
-
-
-
 #############################
 ##                          ##
 ##      FUNCTIONS            ##
 ##                          ##
 #############################
-
-
-
 
 
 ###############################################################################################
@@ -184,19 +176,6 @@ sub initialize {
     
     return(1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ###############################################################################################
@@ -467,12 +446,6 @@ sub processCommandLine {
         
     }
 
-
-
-
-
-
-    
     
     ###################################################
     ##  Verify required variables are set correctly  ##
@@ -546,28 +519,12 @@ sub processCommandLine {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## getline($socketRef)
 sub getline {
     my ($socketRef) = @_;
     local ($/) = "\r\n";
     return $$socketRef->getline;
 }
-
-
 
 
 ## Receive a (multiline?) SMTP response from ($socketRef)
@@ -586,8 +543,6 @@ sub getResponse {
     $reply =~ s/\r?\n$//o;
     return $reply;
 }
-
-
 
 
 ###############################################################################################
@@ -650,16 +605,6 @@ sub SMTPchat {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 ###############################################################################################
 ##  Function:    evalSMTPresponse (string $message )
 ##
@@ -708,14 +653,6 @@ sub evalSMTPresponse {
 }
 
 
-
-
-
-
-
-
-
-
 #########################################################
 # SUB: &return_month(0,1,etc)
 #  returns the name of the month that corrosponds
@@ -739,20 +676,6 @@ sub return_month {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #########################################################
 # SUB: &return_day(0,1,etc)
 #  returns the name of the day that corrosponds
@@ -769,20 +692,6 @@ sub return_day {
     if ($x == 6)  { return 'Sat'; }
     return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ###############################################################################################
@@ -838,20 +747,6 @@ sub returnAddressParts {
     }
     return($name, $address);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ###############################################################################################
@@ -911,13 +806,6 @@ sub base64_encode {
     $data =~ s/(\r|\n)*$//s;
     return($data);
 }
-
-
-
-
-
-
-
 
 
 #########################################################
@@ -1064,13 +952,6 @@ sub send_attachment {
 }
 
 
-
-
-
-
-
-
-
 ###############################################################################################
 ##  Function:    $string = get_hostname (boot $fqdn)
 ##  
@@ -1147,12 +1028,6 @@ sub get_hostname {
 }
 
 
-
-
-
-
-
-
 ###############################################################################################
 ##  Function:    printmsg (string $message, int $level)
 ##
@@ -1210,16 +1085,6 @@ sub printmsg {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 ###############################################################################################
 ## FUNCTION:
 ##   openLogFile ( $filename )
@@ -1260,12 +1125,6 @@ sub openLogFile {
 }
 
 
-
-
-
-
-
-
 ###############################################################################################
 ##  Function:    read_file (string $filename)
 ##  
@@ -1293,13 +1152,6 @@ sub read_file {
     }
     return((1, ""));
 }
-
-
-
-
-
-
-
 
 
 ###############################################################################################
@@ -1348,16 +1200,6 @@ sub generate_random_string {
     
     return $random_string;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 ###############################################################################################
@@ -1426,13 +1268,6 @@ exit(1);
 }
 
 
-
-
-
-
-
-
-
 ###############################################################################################
 ## Function:    helpTopic ($topic)
 ##
@@ -1445,8 +1280,6 @@ sub helpTopic {
     my ($topic) = @_;
 
     CASE: {
-
-
 
 
 ## ADDRESSING
@@ -1519,10 +1352,6 @@ Examples:
 EOM
             last CASE;
         };
-
-
-
-
 
 
 ## MESSAGE
@@ -1650,10 +1479,6 @@ EOM
         };
 
 
-
-
-
-
 ## MISC
         ($topic eq 'misc') && do {
             print <<EOM;
@@ -1716,10 +1541,6 @@ EOM
         };
 
 
-
-
-
-
 ## NETWORKING
         ($topic eq 'networking') && do {
             print <<EOM;
@@ -1774,10 +1595,6 @@ EOM
         };
 
 
-
-
-
-
 ## OUTPUT
         ($topic eq 'output') && do {
             print <<EOM;
@@ -1825,26 +1642,6 @@ exit(1);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #############################
 ##                          ##
 ##      MAIN PROGRAM         ##
@@ -1861,8 +1658,6 @@ $conf{'alarm'} = $opt{'timeout'};
 
 ## Abort program after $conf{'alarm'} seconds to avoid infinite hangs
 alarm($conf{'alarm'}) if ($^O !~ /win/i);  ## alarm() doesn't work in win32
-
-
 
 
 ###################################################
@@ -1925,8 +1720,6 @@ $year += 1900; $mon = return_month($mon); $day = return_day($day);
 my $date = sprintf("%s, %s %s %d %.2d:%.2d:%.2d %s",$day, $mday, $mon, $year, $hour, $min, $sec, $conf{'timezone'});
 
 
-
-
 ##################################
 ##  Connect to the SMTP server  ##
 ##################################
@@ -1956,11 +1749,6 @@ if ( (!$SERVER) or (!$SERVER->opened()) ) {
 ## Save our IP address for later
 $conf{'ip'} = $SERVER->sockhost();
 printmsg("DEBUG => My IP address is: $conf{'ip'}", 1);
-
-
-
-
-
 
 
 #########################
@@ -2251,7 +2039,6 @@ else {
     print $SERVER $CRLF . $message;
     
     
-    
     ## Send Attachemnts
     if (scalar(@attachments) > 0) {
         ## Disable the alarm so people on modems can send big attachments
@@ -2273,16 +2060,13 @@ else {
         }
     }
     
-    
     ## End the mime encoded message
     print $SERVER "$CRLF--$conf{'delimiter'}--$CRLF";  
 }
 
-
 ## Tell the server we are done sending the email
 print $SERVER "$CRLF.$CRLF";
 if (SMTPchat()) { quit($conf{'error'}, 1); }
-
 
 
 ####################
@@ -2292,10 +2076,6 @@ if (SMTPchat()) { quit($conf{'error'}, 1); }
 ## Disconnect from the server (don't SMTPchat(), it breaks when using TLS)
 print $SERVER "QUIT$CRLF";
 close $SERVER;
-
-
-
-
 
 
 #######################################
@@ -2347,4 +2127,3 @@ else {
     ## Or the standard message
     quit("Email was sent successfully!", 0);
 }
-
