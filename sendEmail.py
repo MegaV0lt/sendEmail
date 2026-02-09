@@ -42,9 +42,9 @@ import logging
 # Global variables
 CRLF = "\r\n"
 PROGRAM_NAME = os.path.basename(sys.argv[0])
-VERSION = "1.56.2-tls1.2-dsn-python3"
-AUTHOR_NAME = "Brandon Zehm"
-AUTHOR_EMAIL = "caspian@dotconf.net"
+VERSION = "1.56.2-python3"
+AUTHOR_NAME = "MegaV0lt"
+AUTHOR_EMAIL = "github.com/MegaV0lt"
 TIMEZONE = "+0000"
 
 # Color codes
