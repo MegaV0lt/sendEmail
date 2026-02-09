@@ -3,8 +3,10 @@
 ##############################################################################
 ## sendEmail - Python3-Implementation
 ## Originally Written by: Brandon Zehm <caspian@dotconf.net>
-## Converted to Python3 by github.com/MegaV0lt
-##
+## Modifications by: MegaV0lt @ github.com
+##   Convert original sendEmail.pl to Python 3
+##   Use Python's built-in email and mimetypes modules for message construction 
+##     and MIME type detection 
 ## License: GNU General Public License v2 or later
 ##############################################################################
 
@@ -189,87 +191,9 @@ class EmailSender:
         return True
     
     def get_mime_type(self, filename):
-        """Detect MIME type based on file extension"""
-        mime_map = {
-            'txt': 'text/plain',
-            'text': 'text/plain',
-            'log': 'text/plain',
-            'conf': 'text/plain',
-            'c': 'text/plain',
-            'cpp': 'text/plain',
-            'h': 'text/plain',
-            'inc': 'text/plain',
-            'm3u': 'text/plain',
-            'html': 'text/html',
-            'htm': 'text/html',
-            'shtml': 'text/html',
-            'shtm': 'text/html',
-            'asp': 'text/html',
-            'php': 'text/html',
-            'cfm': 'text/html',
-            'sh': 'application/x-sh',
-            'tcl': 'application/x-tcl',
-            'pl': 'application/x-perl',
-            'js': 'application/x-javascript',
-            'man': 'application/x-troff-man',
-            'gif': 'image/gif',
-            'jpg': 'image/jpeg',
-            'jpeg': 'image/jpeg',
-            'jpe': 'image/jpeg',
-            'jfif': 'image/jpeg',
-            'pjpeg': 'image/jpeg',
-            'pjp': 'image/jpeg',
-            'tif': 'image/tiff',
-            'tiff': 'image/tiff',
-            'xpm': 'image/x-xpixmap',
-            'bmp': 'image/x-MS-bmp',
-            'pcd': 'image/x-photo-cd',
-            'png': 'image/png',
-            'aif': 'audio/x-aiff',
-            'aiff': 'audio/x-aiff',
-            'wav': 'audio/x-wav',
-            'mp2': 'audio/x-mpeg',
-            'mp3': 'audio/x-mpeg',
-            'mpa': 'audio/x-mpeg',
-            'ra': 'audio/x-pn-realaudio',
-            'ram': 'audio/x-pn-realaudio',
-            'mpeg': 'video/mpeg',
-            'mpg': 'video/mpeg',
-            'mov': 'video/quicktime',
-            'qt': 'video/quicktime',
-            'avi': 'video/x-msvideo',
-            'zip': 'application/x-zip-compressed',
-            'tar': 'application/x-tar',
-            'jar': 'application/java-archive',
-            'exe': 'application/octet-stream',
-            'bin': 'application/octet-stream',
-            'ppt': 'application/vnd.ms-powerpoint',
-            'pot': 'application/vnd.ms-powerpoint',
-            'ppa': 'application/vnd.ms-powerpoint',
-            'pps': 'application/vnd.ms-powerpoint',
-            'pwz': 'application/vnd.ms-powerpoint',
-            'mdb': 'application/vnd.ms-access',
-            'mda': 'application/vnd.ms-access',
-            'mde': 'application/vnd.ms-access',
-            'xls': 'application/vnd.ms-excel',
-            'xlt': 'application/vnd.ms-excel',
-            'xlm': 'application/vnd.ms-excel',
-            'xld': 'application/vnd.ms-excel',
-            'xla': 'application/vnd.ms-excel',
-            'xlc': 'application/vnd.ms-excel',
-            'xlw': 'application/vnd.ms-excel',
-            'xll': 'application/vnd.ms-excel',
-            'doc': 'application/msword',
-            'dot': 'application/msword',
-            'rtf': 'application/rtf',
-            'pdf': 'application/pdf',
-            'tex': 'application/x-tex',
-            'latex': 'application/x-latex',
-            'vcf': 'application/x-vcard',
-        }
-        
-        ext = os.path.splitext(filename)[1].lstrip('.').lower()
-        return mime_map.get(ext, 'application/octet-stream')
+        """Detect MIME type based on file extension using Python's mimetypes module"""
+        mime_type, _ = mimetypes.guess_type(filename)
+        return mime_type or 'application/octet-stream'
     
     def connect_to_server(self):
         """Connect to SMTP server"""
