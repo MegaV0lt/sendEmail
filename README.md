@@ -1,10 +1,9 @@
 # sendEmail
-SendEmail is a lightweight, command line SMTP email client. If you have the need to send email from a command line, this free program is perfect: simple to use and feature rich. It was designed to be used in bash scripts, batch files, Perl programs and web sites, but is quite adaptable and will likely meet your requirements. SendEmail is written in Perl and is unique in that it requires NO MODULES. It has an intuitive and flexible set of command-line options, making it very easy to learn and use. SendEmail is licensed under the GNU GPL, either version 2 of the License or (at your option) any later version.
+SendEmail is a lightweight, command line SMTP email client. If you have the need to send email from a command line, this free program is perfect: simple to use and feature rich. It was designed to be used in bash scripts, batch files, Perl programs and web sites, but is quite adaptable and will likely meet your requirements. SendEmail is written in Perl and is unique in that it requires NO MODULES. It has an intuitive and flexible set of command-line options, making it very easy to learn and use. SendEmail is also provided as an Pyton3 version for systems without perl. SendEmail is licensed under the GNU GPL, either version 2 of the License or (at your option) any later version.
 [Supported Platforms: Linux, BSD, OS X, Windows XP and higher]
 
 sendEmail - Send email from a console near you!
 Written by: Brandon Zehm <caspian@dotconf.net>
-
 
 
 ------------------
@@ -12,8 +11,8 @@ Installation
 ------------------
 
 SendEmail is a perl script/program, and only needs to be copied to a directory
-in your path to make it accessible.  Most likely the following steps will
-be sufficient:
+in your path to make it accessible. To install the python version just replace
+.pl wit .py. Most likely the following steps will be sufficient:
 
 1) Unzip the package sendEmail-v1.XX.zip
 
@@ -43,13 +42,9 @@ be sufficient:
 NOTES:
 
 * Running sendEmail without any arguments will display a helpful usage summary.
-* SendEmail is written in Perl, so no compilation is needed.
+* SendEmail is written in Perl/Python3, so no compilation is needed.
 * On a Unix/Linux OS if your perl binary is not installed at /usr/bin/perl
 you may need to edit the first line of the script accordingly.
-
-
-
-
 
 
 ---------------
@@ -148,7 +143,6 @@ Sending to multiple people using cc and bcc recipients:
             -m "Hi guys, this is a test email."
 ```
 
-
 Sending to multiple people with multiple attachments:
 
 ```
@@ -189,17 +183,14 @@ Sending an html email:  (make sure your html file has <html> at the beginning)
                                  -u "Test email with html content"
 ```
 
-
-
-
-
-
-
-
 ------------
 Contributors
 ------------
-   
+
+  MegaV0lt (1.56.2-python3)
+   - Convert original sendEmail.pl to Python 3
+   - Use Python's built-in email and mimetypes modules
+
   Goran Katavić (v1.56.2)
    - Added support for Delivery Status Notification (DSN)
 
@@ -275,5 +266,3 @@ Contributors
 
   Many other people have submitted bug reports and helped to make sendEmail
   what it is today, and my best regards go out to all those .. complainers ;-)
-
-
